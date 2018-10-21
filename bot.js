@@ -103,6 +103,7 @@ client.on('message', async msg => {
 		const voiceChannel = msg.member.voiceChannel;
         
         if (!voiceChannel) return msg.channel.send("**:x: You have to be in a voice channel to use this command.**");
+        if (!voiceChannel) return msg.channel.send("**!p [Link or query]");
         
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         
