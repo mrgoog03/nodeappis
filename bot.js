@@ -20,7 +20,7 @@ const gif = require("gif-search");
 
 const client = new Discord.Client({disableEveryone: true});
 
-const prefix = "!";
+const prefix = "$";
 /////////////////////////
 ////////////////////////
 
@@ -56,7 +56,7 @@ client.on('message', async msg =>{
 	command = command.slice(prefix.length)
 
     if(command === `avatar`){
-	if(msg.channel.type === 'dm') return msg.channel.send("Nope Nope!! u can't use avatar command in DMs (:")
+	if(msg.channel.type === 'dm') return msg.channel.send("**Nope Nope!! u can't use avatar command in DMs (:**")
         let mentions = msg.mentions.members.first()
         if(!mentions) {
           let sicon = msg.author.avatarURL
