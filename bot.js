@@ -103,23 +103,22 @@ client.on('message', async msg => {
 		const voiceChannel = msg.member.voiceChannel;
         
         if (!voiceChannel) return msg.channel.send("**:x: You have to be in a voice channel to use this command.**");
-        if (!voiceChannel) return msg.channel.send("**!p [Link or query]");
         
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         
         if (!permissions.has('CONNECT')) {
 
-			return msg.channel.send("I don't have enough permissions to join your voice channel!");
+			return msg.channel.send("**:x: I don't have enough permissions to join your voice channel!**");
         }
         
 		if (!permissions.has('SPEAK')) {
 
-			return msg.channel.send("I don't have enough permissions to speak in your voice channel!");
+			return msg.channel.send("**:x: I don't have enough permissions to speak in your voice channel!**");
 		}
 
 		if (!permissions.has('EMBED_LINKS')) {
 
-			return msg.channel.sendMessage("I don't have enough permissions to insert a URLs!")
+			return msg.channel.sendMessage("**:x: I don't have enough permissions to insert a URLs!**")
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -133,7 +132,7 @@ client.on('message', async msg => {
                 const video2 = await youtube.getVideoByID(video.id); 
                 await handleVideo(video2, msg, voiceChannel, true); 
             }
-			return msg.channel.send(`**${playlist.title}**, Just added to the queue!`);
+			return msg.channel.send(`**${playlist.title}, Just added to the queue!**`);
 		} else {
 
 			try {
@@ -172,7 +171,7 @@ client.on('message', async msg => {
 				} catch (err) {
 
 					console.error(err);
-					return msg.channel.send("I didn't find any results!");
+					return msg.channel.send("**I didn't find any results!**");
 				}
 			}
 
@@ -182,25 +181,25 @@ client.on('message', async msg => {
         
 	} else if (command === `s`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
-        if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
+		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
+        if (!serverQueue) return msg.channel.send("**There is no Queue to skip!!**");
 
 		serverQueue.connection.dispatcher.end('Ok, skipped!');
         return undefined;
         
 	} else if (command === `stop`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
+		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
         if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
         
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
+		serverQueue.connection.dispatcher.end('**Ok, stopped & disconnected from your Voice channel**');
         return undefined;
         
 	} else if (command === `vol`) {
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
-		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
+		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
+		if (!serverQueue) return msg.channel.send('**You only can use this command while music is playing!**');
         if (!args[1]) return msg.channel.send(`The bot volume is **${serverQueue.volume}**`);
         
 		serverQueue.volume = args[1];
@@ -210,14 +209,14 @@ client.on('message', async msg => {
 
 	} else if (command === `np`) {
 
-		if (!serverQueue) return msg.channel.send('There is no Queue!');
+		if (!serverQueue) return msg.channel.send('**There is no Queue!**');
 		const embedNP = new Discord.RichEmbed()
 	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
         return msg.channel.sendEmbed(embedNP);
         
 	} else if (command === `queue`) {
 		
-		if (!serverQueue) return msg.channel.send('There is no Queue!!');
+		if (!serverQueue) return msg.channel.send('**There is no Queue!!**');
 		let index = 0;
 //	//	//
 		const embedqu = new Discord.RichEmbed()
