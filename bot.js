@@ -317,14 +317,14 @@ client.on('message', message => {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الميوزك...**')
         .setDescription('**برفكس البوت (!)**')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
+        .addField('!p', 'لتشغيل اغنية')
+        .addField('!join', 'دخول رومك الصوتي')
+        .addField('!disconnect', 'الخروج من رومك الصوتي')
+        .addField('!s', 'تخطي الأغنية')
+        .addField('!pause', 'ايقاف الاغنية مؤقتا')
+        .addField('!resume', 'تكملة الاغنية')
+        .addField('!queue', 'اظهار قائمة التشغيل')
+        .addField('!np', 'اظهار الاغنية اللي انت مشغلها حاليا')
         .setFooter('(general_commands) لاظهار الاوامر العامة')
       message.channel.send(helpEmbed);
     }
@@ -334,12 +334,23 @@ client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر عامة...**')
-        .addField('avatar', "افاتار الشخص المطلوب")
-        .addField('gif', 'البحث عن جيف انت تطلبه')
-        .addField('ping', 'معرفة ping البوت')
+        .addField('!avatar', "افاتار الشخص المطلوب")
+        .addField('!gif', 'البحث عن جيف انت تطلبه')
+        .addField('!ping', 'معرفة ping البوت')
         .setFooter('المزيد قريبا ان شاء الله!')
       message.channel.send(helpEmbed);
     }
+});
+
+client.on('ready', () => {
+   console.log(`----------------`);
+      console.log(`Desert Bot- Script By : L4EX`);
+        console.log(`----------------`);
+      console.log(`ON ${client.guilds.size} Servers '     Script By : L4EX ' `);
+    console.log(`----------------`);
+  console.log(`Logged in as ${client.user.tag}!`);
+client.user.setGame(`- Streak BOT -`,"http://instagram.com/l4ex")
+client.user.setStatus("dnd")
 });
 
 client.login(process.env.BOT_TOKEN);
