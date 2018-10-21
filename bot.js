@@ -20,7 +20,7 @@ const gif = require("gif-search");
 
 const client = new Discord.Client({disableEveryone: true});
 
-const prefix = "$";
+const prefix = "!";
 /////////////////////////
 ////////////////////////
 
@@ -184,13 +184,13 @@ client.on('message', async msg => {
 		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
         if (!serverQueue) return msg.channel.send("**There is no Queue to skip!!**");
 
-		serverQueue.connection.dispatcher.end('Ok, skipped!');
+		serverQueue.connection.dispatcher.end('**Ok, skipped!**');
         return undefined;
         
 	} else if (command === `stop`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
-        if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
+        if (!serverQueue) return msg.channel.send("**There is no Queue to stop!!**");
         
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('**Ok, stopped & disconnected from your Voice channel**');
@@ -200,12 +200,12 @@ client.on('message', async msg => {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("**You Must be in a Voice channel to Run the Music commands!**");
 		if (!serverQueue) return msg.channel.send('**You only can use this command while music is playing!**');
-        if (!args[1]) return msg.channel.send(`The bot volume is **${serverQueue.volume}**`);
+        if (!args[1]) return msg.channel.send(`**The bot volume is ${serverQueue.volume}**`);
         
 		serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
         
-        return msg.channel.send(`Volume Now is **${args[1]}**`);
+        return msg.channel.send(`**Volume Now is ${args[1]}**`);
 
 	} else if (command === `np`) {
 
@@ -230,18 +230,18 @@ client.on('message', async msg => {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('Ok, paused');
+			return msg.channel.send('**Ok, paused**');
 		}
-		return msg.channel.send('There is no Queue to Pause!');
+		return msg.channel.send('**There is no Queue to Pause!**');
 	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-            return msg.channel.send('Ok, resumed!');
+            return msg.channel.send('**Ok, resumed!**');
             
 		}
-		return msg.channel.send('Queue is empty!');
+		return msg.channel.send('**Queue is empty!**');
 	}
 
 	return undefined;
@@ -275,15 +275,15 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			queueConstruct.connection = connection;
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}!`);
+			console.error(`**I could not join the voice channel: ${error}!**`);
 			queue.delete(msg.guild.id);
-			return msg.channel.send(`Can't join this channel: ${error}!`);
+			return msg.channel.send(`**Can't join this channel: ${error}!**`);
 		}
 	} else {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return msg.channel.send(`**${song.title}**, just added to the queue! `);
+		else return msg.channel.send(`**${song.title}, just added to the queue!** `);
 	} 
 	return undefined;
 }
