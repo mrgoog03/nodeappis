@@ -102,7 +102,7 @@ client.on('message', async msg => {
 	if (command === `p`) {
 		const voiceChannel = msg.member.voiceChannel;
         
-        if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
+        if (!voiceChannel) return msg.channel.send("**:x: You have to be in a voice channel to use this command.**");
         
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         
