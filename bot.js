@@ -349,7 +349,7 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : L4EX ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`- Streak BOT -| **!p + !s**`,"http://instagram.com/l4ex")
+client.user.setGame(`- Streak BOT -| !p + !s`,"http://instagram.com/l4ex")
 client.user.setStatus("dnd")
 });
 
