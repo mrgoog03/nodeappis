@@ -21,6 +21,12 @@ const gif = require("gif-search");
 const client = new Discord.Client({disableEveryone: true});
 
 const prefix = "!";
+
+const fs = require('fs');
+
+const suck = JSON.parse(fs.readFileSync('./suck.json', 'utf8'));
+
+const prefix = "!";
 /////////////////////////
 ////////////////////////
 
@@ -377,11 +383,7 @@ client.on('message', msg => {
 }
 });
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const fs = require('fs');
-const suck = JSON.parse(fs.readFileSync('./suck.json', 'utf8'));
-const prefix = "!";
+
 // By M7MD
 client.on("message", message => {
     fs.writeFile('./suck.json', JSON.stringify(suck));
